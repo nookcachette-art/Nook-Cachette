@@ -844,40 +844,41 @@
       img.addEventListener('error', () => { img.style.display = 'none'; });
     });
 
-    // Dynamic Gallery Loading
+    // Dynamic Gallery — GitHub API で images/ フォルダを自動取得
     const galleryGrid = document.getElementById('gallery-grid');
-    const galleryImages = [
-      { file: 'gallery-1.jpg', label: 'Gallery 1', tall: true },
-      { file: 'gallery-2.jpg', label: 'Gallery 2' },
-      { file: 'gallery-3.jpg', label: 'Gallery 3' },
-      { file: 'gallery-4.jpg', label: 'Gallery 4' },
-      { file: 'gallery-5.jpg', label: 'Gallery 5' }
-    ];
+    const REPO = 'shunsuke2121/Nook-Cachette';
 
-    galleryImages.forEach((item, index) => {
-      const cell = document.createElement('div');
-      cell.className = `interior-cell ${item.tall ? 'tall' : ''}`;
-      
-      const img = document.createElement('img');
-      img.src = `images/${item.file}`;
-      img.alt = item.label;
-      img.onerror = function() { this.style.display = 'none'; };
-      
-      const placeholder = document.createElement('div');
-      placeholder.className = 'interior-placeholder';
-      if (item.label === 'Gallery 5') {
-        placeholder.style.fontFamily = "'Cormorant Garamond', serif";
-        placeholder.style.fontSize = '1.3rem';
-        placeholder.style.letterSpacing = '.2em';
-      }
-      placeholder.textContent = item.label;
-      
-      cell.appendChild(img);
-      cell.appendChild(placeholder);
-      galleryGrid.appendChild(cell);
+    fetch(`https://api.github.com/repos/${REPO}/contents/images`)
+      .then(res => res.json())
+      .then(files => {
+        const images = files
+          .filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f.name))
+          .sort((a, b) => a.name.localeCompare(b.name));
 
-      img.addEventListener('load', () => { placeholder.style.display = 'none'; });
-    });
+        images.forEach((file, index) => {
+          const cell = document.createElement('div');
+          cell.className = 'interior-cell' + (index === 0 ? ' tall' : '');
+          const img = document.createElement('img');
+          img.src = `images/${file.name}`;
+          img.alt = file.name;
+          img.onerror = () => { cell.style.display = 'none'; };
+          cell.appendChild(img);
+          galleryGrid.appendChild(cell);
+        });
+      })
+      .catch(() => {
+        // ローカル確認用フォールバック
+        ['gallery-1','gallery-2','gallery-3','gallery-4'].forEach((name, index) => {
+          const cell = document.createElement('div');
+          cell.className = 'interior-cell' + (index === 0 ? ' tall' : '');
+          const img = document.createElement('img');
+          img.src = `images/${name}.jpg`;
+          img.alt = name;
+          img.onerror = () => { cell.style.display = 'none'; };
+          cell.appendChild(img);
+          galleryGrid.appendChild(cell);
+        });
+      });
   </script>
 
 </body>
