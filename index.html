@@ -844,30 +844,23 @@
       img.addEventListener('error', () => { img.style.display = 'none'; });
     });
 
-    // Dynamic Gallery — GitHub API で images/ フォルダを自動取得
+    // Dynamic Gallery — gallery.json から画像リストを取得
     const galleryGrid = document.getElementById('gallery-grid');
-    // ホスト名からリポジトリを自動取得 (例: nookcachette-art.github.io/Nook-Cachette)
-    const [repoOwner] = window.location.hostname.replace('.github.io', '').split('.');
-    const repoName = window.location.pathname.split('/').filter(Boolean)[0] || 'Nook-Cachette';
-    const REPO = `${repoOwner}/${repoName}`;
 
-    fetch(`https://api.github.com/repos/${REPO}/contents/images`)
+    fetch('images/gallery.json?v=' + Date.now())
       .then(res => res.json())
-      .then(files => {
-        const images = files
-          .filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f.name))
-          .sort((a, b) => a.name.localeCompare(b.name));
-
-        images.forEach((file, index) => {
+      .then(data => {
+        data.images.forEach((filename, index) => {
           const cell = document.createElement('div');
           cell.className = 'interior-cell' + (index === 0 ? ' tall' : '');
           const img = document.createElement('img');
-          img.src = `images/${file.name}`;
-          img.alt = file.name;
+          img.src = 'images/' + filename;
+          img.alt = filename;
           img.onerror = () => { cell.style.display = 'none'; };
           cell.appendChild(img);
           galleryGrid.appendChild(cell);
         });
+      });
       })
       .catch(() => {
         // ローカル確認用フォールバック
