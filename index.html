@@ -846,7 +846,10 @@
 
     // Dynamic Gallery — GitHub API で images/ フォルダを自動取得
     const galleryGrid = document.getElementById('gallery-grid');
-    const REPO = 'shunsuke2121/Nook-Cachette';
+    // ホスト名からリポジトリを自動取得 (例: nookcachette-art.github.io/Nook-Cachette)
+    const [repoOwner] = window.location.hostname.replace('.github.io', '').split('.');
+    const repoName = window.location.pathname.split('/').filter(Boolean)[0] || 'Nook-Cachette';
+    const REPO = `${repoOwner}/${repoName}`;
 
     fetch(`https://api.github.com/repos/${REPO}/contents/images`)
       .then(res => res.json())
