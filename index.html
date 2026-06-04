@@ -860,6 +860,10 @@
           cell.appendChild(img);
           galleryGrid.appendChild(cell);
         });
+      })
+      .catch(() => {
+        // gallery.json が存在しない場合は何もしない
+        console.warn('gallery.json not found');
       });
 
   </script>
