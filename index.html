@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CooShe — private nail salon | 札幌 西11丁目</title>
+  <meta name="description" content="札幌・西11丁目のプライベートネイルサロン CooShe（ヌーシェ）。ニュアンスネイル・オフィスネイルのご予約受付中。" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #F6F3EF;
+      --surface:  #EDE9E3;
+      --concrete: #9B9590;
+      --mid:      #C6C1BA;
+      --dark:     #1E1B18;
+      --muted:    #7A7470;
+      --accent:   #B5A498;
+      --white:    #FDFBF8;
+      --border:   rgba(155,149,144,0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--dark);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.9;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 3rem;
+      background: rgba(246,243,239,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--border);
+      transition: padding .4s;
+    }
+    nav.scrolled { padding: 1rem 3rem; }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.35rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--concrete); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--dark); }
+
+    /* ─── HERO ────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      background: var(--surface);
+      display: flex;
+      align-items: flex-end;
+      padding: 7rem 4rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* concrete texture via CSS */
+    .hero-left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse at 30% 20%, rgba(155,149,144,.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 70% 75%, rgba(155,149,144,.12) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-left::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: .6;
+      pointer-events: none;
+    }
+
+    .hero-text { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--concrete);
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3.2rem, 6vw, 5.5rem);
+      line-height: 1.05;
+      letter-spacing: -.01em;
+      color: var(--dark);
+      margin-bottom: .6rem;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--concrete);
+    }
+
+    .hero-subtitle {
+      font-size: 11px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 1.8rem;
+      margin-bottom: 3rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+      font-size: 11px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+      border-bottom: 0.5px solid var(--dark);
+      padding-bottom: 3px;
+      transition: gap .3s, opacity .3s;
+    }
+    .hero-cta:hover { gap: 1.1rem; opacity: .7; }
+    .hero-cta svg { width: 16px; height: 16px; }
+
+    .hero-right {
+      position: relative;
+      background: var(--concrete);
+      overflow: hidden;
+    }
+    /* salon photo placeholder — replace src with actual image */
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: .9;
+    }
+
+    .hero-right-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, transparent 50%, rgba(30,27,24,.25) 100%);
+    }
+
+    .hero-badge {
+      position: absolute;
+      bottom: 3rem;
+      right: 3rem;
+      width: 90px;
+      height: 90px;
+    }
+    .hero-badge svg {
+      width: 100%;
+      height: 100%;
+      animation: badge-spin 18s linear infinite;
+    }
+    @keyframes badge-spin { to { transform: rotate(360deg); } }
+
+    /* ─── SECTION COMMONS ─────────────────── */
+    section { padding: 7rem 0; }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--concrete);
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.15;
+      color: var(--dark);
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 0.5px solid var(--border);
+      margin: 5rem 0;
+    }
+
+    /* ─── CONCEPT ─────────────────────────── */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+      margin-top: 4rem;
+    }
+
+    .concept-word-card {
+      border-top: 0.5px solid var(--border);
+      padding-top: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .concept-word-card .lang {
+      font-size: 10px;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--concrete);
+      margin-bottom: .4rem;
+    }
+    .concept-word-card .word {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 2.4rem;
+      letter-spacing: .04em;
+      color: var(--dark);
+      line-height: 1;
+      margin-bottom: .25rem;
+    }
+    .concept-word-card .reading {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .15em;
+    }
+    .concept-word-card .meaning {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: .6rem;
+    }
+
+    .concept-body p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 2;
+      margin-bottom: 1.2rem;
+    }
+
+    .concept-image-wrap {
+      position: relative;
+    }
+    .concept-image-wrap img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+    }
+    .concept-image-caption {
+      font-size: 11px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--concrete);
+      margin-top: 1rem;
+      text-align: right;
+    }
+
+    /* ─── MENU ────────────────────────────── */
+    .menu-section { background: var(--surface); }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 4rem;
+    }
+
+    .menu-item {
+      background: var(--white);
+      padding: 2.5rem 2rem;
+      position: relative;
+      transition: background .3s;
+    }
+    .menu-item:hover { background: var(--bg); }
+
+    .menu-item-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .85rem;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+    .menu-item-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--dark);
+      margin-bottom: .5rem;
+      letter-spacing: .05em;
+    }
+    .menu-item-desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* ─── INTERIOR ────────────────────────── */
+    .interior-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 280px 280px;
+      gap: 3px;
+      margin-top: 4rem;
+    }
+    .interior-cell {
+      background: var(--surface);
+      overflow: hidden;
+      position: relative;
+    }
+    .interior-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s ease;
+    }
+    .interior-cell:hover img { transform: scale(1.03); }
+    .interior-cell.tall { grid-row: span 2; }
+
+    .interior-placeholder {
+      width: 100%;
+      height: 100%;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    /* ─── STYLIST ─────────────────────────── */
+    .stylist-row {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .stylist-portrait {
+      aspect-ratio: 3/4;
+      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+    }
+    .stylist-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .stylist-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 3.5rem;
+      line-height: 1;
+      color: var(--dark);
+      margin-bottom: .5rem;
+    }
+    .stylist-role {
+      font-size: 11px;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--concrete);
+      margin-bottom: 2rem;
+    }
+    .stylist-bio {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 2;
+      max-width: 420px;
+    }
+
+    /* ─── ACCESS ──────────────────────────── */
+    .access-section { background: var(--dark); color: var(--bg); }
+    .access-section .section-label { color: var(--mid); }
+    .access-section .section-title { color: var(--white); }
+
+    .access-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      margin-top: 4rem;
+      align-items: start;
+    }
+
+    .access-info-item {
+      border-top: 0.5px solid rgba(155,149,144,.2);
+      padding-top: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .access-info-item .label {
+      font-size: 10px;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: .5rem;
+    }
+    .access-info-item .value {
+      font-size: 14px;
+      color: var(--bg);
+      line-height: 1.8;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+    }
+    .access-info-item a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 0.5px solid var(--accent);
+      transition: opacity .25s;
+    }
+    .access-info-item a:hover { opacity: .7; }
+
+    .map-embed {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border: 0;
+      filter: grayscale(60%) contrast(1.05);
+    }
+
+    /* ─── INSTAGRAM ───────────────────────── */
+    .ig-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .ig-handle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      letter-spacing: .04em;
+      color: var(--dark);
+      text-decoration: none;
+      transition: color .25s;
+    }
+    .ig-handle:hover { color: var(--concrete); }
+    .ig-handle span { color: var(--mid); }
+
+    .ig-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      border: 0.5px solid var(--dark);
+      padding: .75rem 1.8rem;
+      font-size: 11px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+      transition: background .25s, color .25s;
+    }
+    .ig-link-btn:hover {
+      background: var(--dark);
+      color: var(--white);
+    }
+
+    /* ─── FOOTER ──────────────────────────── */
+    footer {
+      background: var(--dark);
+      padding: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.1rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .footer-copy {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .1em;
+    }
+
+    /* ─── REVEAL ANIMATION ────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .35s; }
+
+    /* ─── RESPONSIVE ──────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      nav.scrolled { padding: .9rem 1.5rem; }
+      .container { padding: 0 1.5rem; }
+      section { padding: 5rem 0; }
+
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 8rem 1.5rem 4rem; }
+      .hero-right { height: 55vw; }
+      .hero-badge { width: 70px; height: 70px; bottom: 1.5rem; right: 1.5rem; }
+
+      .concept-grid,
+      .stylist-row,
+      .access-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+      .menu-grid { grid-template-columns: 1fr; gap: 2px; }
+
+      .interior-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .interior-cell.tall { grid-row: span 1; }
+      .interior-cell { height: 200px; }
+
+      .ig-row { flex-direction: column; align-items: flex-start; }
+      .nav-links { display: none; }
+
+      footer { flex-direction: column; gap: .5rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="#" class="nav-logo">Coo<span>She</span></a>
+    <ul class="nav-links">
+      <li><a href="#concept">Concept</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#stylist">Stylist</a></li>
+      <li><a href="#access">Access</a></li>
+      <li><a href="https://www.instagram.com/nooshe_sapporo.nail/" target="_blank" rel="noopener">Instagram</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-left">
+      <div class="hero-text">
+        <p class="hero-eyebrow">Private Nail Salon — Sapporo</p>
+        <h1 class="hero-title">
+          Nook<br />
+          &amp; <em>Cachette</em>
+        </h1>
+        <p class="hero-subtitle">ニュアンス &ensp;·&ensp; オフィスネイル &ensp;·&ensp; シンプル</p>
+        <a href="https://www.instagram.com/nooshe_sapporo.nail/" target="_blank" rel="noopener" class="hero-cta">
+          ご予約・お問い合わせ
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <!-- サロン内観写真を images/hero.jpg として配置してください -->
+      <img src="images/interior-main.jpg" alt="サロン内観" onerror="this.style.display='none'" />
+      <div class="hero-right-overlay"></div>
+      <div class="hero-badge">
+        <svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="45" cy="45" r="42" stroke="rgba(246,243,239,0.5)" stroke-width="0.5"/>
+          <path id="circle-text-path" d="M 45,45 m -32,0 a 32,32 0 1,1 64,0 a 32,32 0 1,1 -64,0" fill="none"/>
+          <text font-family="'Cormorant Garamond', serif" font-size="7.5" fill="rgba(246,243,239,0.85)" letter-spacing="3.2">
+            <textPath href="#circle-text-path">PRIVATE NAIL SALON  ·  SAPPORO  ·  NOOK &amp; CACHETTE  ·  </textPath>
+          </text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCEPT -->
+  <section id="concept">
+    <div class="container">
+      <p class="section-label reveal">— About</p>
+      <h2 class="section-title reveal reveal-delay-1">
+        こぢんまりとした<br />
+        隠れ家のような空間で。
+      </h2>
+
+      <div class="concept-grid">
+        <div class="reveal reveal-delay-1">
+          <div class="concept-word-card">
+            <p class="lang">English</p>
+            <p class="word">Nook</p>
+            <p class="reading">ヌック</p>
+            <p class="meaning">こぢんまりとした、心地よい空間</p>
+          </div>
+          <div class="concept-word-card">
+            <p class="lang">Français</p>
+            <p class="word">Cachette</p>
+            <p class="reading">カシェット</p>
+            <p class="meaning">隠れ家、秘密の場所</p>
+          </div>
+          <div class="concept-body">
+            <p>
+              「Nooshe（ヌーシェ）」は、英語の <em>Nook</em> とフランス語の <em>Cachette</em>、
+              ふたつの言葉を組み合わせた造語です。
+            </p>
+            <p>
+              コンクリートと白が溶け合う静かな空間に、
+              あなただけのひとときをご用意しています。
+            </p>
+          </div>
+        </div>
+
+        <div class="concept-image-wrap reveal reveal-delay-2">
+          <!-- images/concept.jpg を配置してください -->
+          <img src="images/interior-sub.jpg" alt="サロン内観" onerror="this.parentElement.style.background='var(--surface)'" />
+          <p class="concept-image-caption">CooShe — Nook &amp; Cachette</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu" class="menu-section">
+    <div class="container">
+      <p class="section-label reveal">— Menu</p>
+      <h2 class="section-title reveal reveal-delay-1">施術メニュー</h2>
+
+      <div class="menu-grid">
+        <div class="menu-item reveal">
+          <p class="menu-item-num">01</p>
+          <p class="menu-item-title">ニュアンスネイル</p>
+          <p class="menu-item-desc">繊細なグラデーションやニュアンスカラーで、指先に個性と美しさを。</p>
+        </div>
+        <div class="menu-item reveal reveal-delay-1">
+          <p class="menu-item-num">02</p>
+          <p class="menu-item-title">オフィスネイル</p>
+          <p class="menu-item-desc">シーンを問わず上品に映える、清潔感のある指先づくり。</p>
+        </div>
+        <div class="menu-item reveal reveal-delay-2">
+          <p class="menu-item-num">03</p>
+          <p class="menu-item-title">シンプル / ワンホン</p>
+          <p class="menu-item-desc">シンプルな一本添えで、さりげなく引き立てる大人のネイル。</p>
+        </div>
+      </div>
+
+      <div style="background:var(--white); border:0.5px solid var(--border); border-radius:8px; padding:2rem; margin-top:2.5rem;">
+        <div style="display:flex; align-items:center; gap:1rem; margin-bottom:.8rem;">
+          <span style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--concrete); letter-spacing:.1em;">✓</span>
+          <p style="font-weight:500; font-size:14px; color:var(--dark);">パラジェル取り扱い</p>
+        </div>
+        <p style="font-size:13px; color:var(--muted); line-height:1.8;">
+          爪への負担が少なく、自爪を傷めにくいパラジェルを使用しています。
+          爪の健康を保ちながら、美しいネイルを実現できます。
+        </p>
+      </div>
+
+      <p style="font-size:12px; color:var(--muted); margin-top:2.5rem; letter-spacing:.08em;">
+        ※ 詳しいメニューと料金はInstagramまたはDMにてご確認ください。
+      </p>
+    </div>
+  </section>
+
+  <!-- INTERIOR GALLERY -->
+  <section style="padding: 0;">
+    <div class="interior-grid" id="gallery-grid">
+      <!-- Dynamically filled by JavaScript -->
+    </div>
+  </section>
+
+  <!-- STYLIST -->
+  <section id="stylist">
+    <div class="container">
+      <div class="stylist-row">
+        <div class="stylist-portrait reveal">
+          <img src="images/stylist.jpg" alt="Haru" onerror="this.style.display='none'" />
+          <div style="position:absolute;inset:0;background:var(--surface);display:flex;align-items:center;justify-content:center;">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--mid);letter-spacing:.15em;">Haru</span>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-1">
+          <p class="section-label">— Stylist</p>
+          <h2 class="stylist-name">Haru</h2>
+          <p class="stylist-role">Nail Artist</p>
+          <p class="stylist-bio">
+            札幌のプライベートサロン CooShe のネイリスト。
+            ニュアンスネイルやオフィスネイルを得意とし、
+            お客様一人ひとりに寄り添った繊細な施術を心がけています。
+            <br /><br />
+            ご予約・お問い合わせは Instagram の DM からお気軽にどうぞ。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESS -->
+  <section id="access" class="access-section">
+    <div class="container">
+      <p class="section-label reveal">— Access</p>
+      <h2 class="section-title reveal reveal-delay-1">アクセス</h2>
+
+      <div class="access-grid">
+        <div class="reveal reveal-delay-1">
+          <div class="access-info-item">
+            <p class="label">住所</p>
+            <p class="value">
+              〒060-0006<br />
+              札幌市中央区南6条西11丁目1284-19<br />
+              オフィスビル611 3F<br />
+              <span style="color:var(--muted);font-size:12px;">（株）S.F.C. 内</span>
+            </p>
+          </div>
+          <div class="access-info-item">
+            <p class="label">最寄り駅</p>
+            <p class="value">地下鉄東西線 西11丁目駅 徒歩約3分</p>
+          </div>
+          <div class="access-info-item">
+            <p class="label">営業時間 / 予約</p>
+            <p class="value">
+              完全予約制<br />
+              ご予約は Instagram DM にて承ります
+            </p>
+          </div>
+          <div class="access-info-item">
+            <p class="label">Instagram</p>
+            <p class="value">
+              <a href="https://www.instagram.com/nooshe_sapporo.nail/" target="_blank" rel="noopener">
+                @nooshe_sapporo.nail
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-2">
+          <iframe
+            class="map-embed"
+            title="CooShe アクセスマップ"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2918.7!2d141.3368!3d43.0535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f0b29b6d97f5555%3A0x1!2z5LqM5Yqg5biC5Lit5aSu5Yy65Y2X6Ziq5p2x77yW5p2h6KW_77yR77yR5LiB55uu!5e0!3m2!1sja!2sjp!4v1"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen>
+          </iframe>
+          <p style="font-size:11px;color:var(--muted);margin-top:.8rem;letter-spacing:.08em;">
+            ※ 地図は参考です。詳しい場所はDMにてご案内します。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section>
+    <div class="container">
+      <div class="ig-row">
+        <div class="reveal">
+          <p class="section-label">— Follow us</p>
+          <a href="https://www.instagram.com/nooshe_sapporo.nail/" target="_blank" rel="noopener" class="ig-handle">
+            <span>@</span>nooshe_sapporo.nail
+          </a>
+        </div>
+        <a href="https://www.instagram.com/nooshe_sapporo.nail/" target="_blank" rel="noopener" class="ig-link-btn reveal reveal-delay-1">
+          Instagram で見る
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M2 7h10M8 3l4 4-4 4"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">CooShe — Nook &amp; Cachette</span>
+    <span class="footer-copy">© 2026 CooShe private nail salon, Sapporo.</span>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => io.observe(el));
+
+    // Interior placeholder toggle
+    document.querySelectorAll('.interior-cell').forEach(cell => {
+      const img = cell.querySelector('img');
+      const ph  = cell.querySelector('.interior-placeholder');
+      if (!img) return;
+      img.addEventListener('load', () => { if (ph) ph.style.display = 'none'; });
+      img.addEventListener('error', () => { img.style.display = 'none'; });
+    });
+
+    // Dynamic Gallery Loading
+    const galleryGrid = document.getElementById('gallery-grid');
+    const galleryImages = [
+      { file: 'gallery-1.jpg', label: 'Gallery 1', tall: true },
+      { file: 'gallery-2.jpg', label: 'Gallery 2' },
+      { file: 'gallery-3.jpg', label: 'Gallery 3' },
+      { file: 'gallery-4.jpg', label: 'Gallery 4' },
+      { file: 'gallery-5.jpg', label: 'Gallery 5' }
+    ];
+
+    galleryImages.forEach((item, index) => {
+      const cell = document.createElement('div');
+      cell.className = `interior-cell ${item.tall ? 'tall' : ''}`;
+      
+      const img = document.createElement('img');
+      img.src = `images/${item.file}`;
+      img.alt = item.label;
+      img.onerror = function() { this.style.display = 'none'; };
+      
+      const placeholder = document.createElement('div');
+      placeholder.className = 'interior-placeholder';
+      if (item.label === 'Gallery 5') {
+        placeholder.style.fontFamily = "'Cormorant Garamond', serif";
+        placeholder.style.fontSize = '1.3rem';
+        placeholder.style.letterSpacing = '.2em';
+      }
+      placeholder.textContent = item.label;
+      
+      cell.appendChild(img);
+      cell.appendChild(placeholder);
+      galleryGrid.appendChild(cell);
+
+      img.addEventListener('load', () => { placeholder.style.display = 'none'; });
+    });
+  </script>
+
+</body>
+</html>
