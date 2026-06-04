@@ -861,20 +861,7 @@
           galleryGrid.appendChild(cell);
         });
       });
-      })
-      .catch(() => {
-        // ローカル確認用フォールバック
-        ['gallery-1','gallery-2','gallery-3','gallery-4'].forEach((name, index) => {
-          const cell = document.createElement('div');
-          cell.className = 'interior-cell' + (index === 0 ? ' tall' : '');
-          const img = document.createElement('img');
-          img.src = `images/${name}.jpg`;
-          img.alt = name;
-          img.onerror = () => { cell.style.display = 'none'; };
-          cell.appendChild(img);
-          galleryGrid.appendChild(cell);
-        });
-      });
+
   </script>
 
 </body>
